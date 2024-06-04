@@ -10,13 +10,13 @@ export class AuthController {
 
     constructor(private authService: AuthService) {}
 
-    @ApiOperation({summary: 'Авторизация польззователя'})
+    @ApiOperation({summary: 'Авторизация пользователя'})
     @ApiResponse({
         status: 200,
         description: 'Успешная авторизация',
         schema: {
             example: {
-            token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
+                token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
             },
         },
     })
@@ -25,7 +25,7 @@ export class AuthController {
         description: 'Unauthorized',
         schema: {
             example: {
-            message: "Некорректный email или пароль"
+                message: "Некорректный email или пароль"
             },
         },
     })
@@ -34,6 +34,17 @@ export class AuthController {
         return this.authService.login(userDto);
     }
 
+
+    @ApiOperation({summary: 'Регистрация пользователя'})
+    @ApiResponse({
+        status: 200,
+        description: 'Пользователь создан',
+        schema: {
+            example: {
+                token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
+            }
+        },
+    })
     @Post('/registration')
     registration(@Body() userDto: CreateUserDto) {
         return this.authService.registration(userDto)
